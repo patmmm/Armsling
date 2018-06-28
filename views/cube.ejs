@@ -28,27 +28,39 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 
-var geometry = new THREE.BoxGeometry(1, 1, 1);
-var material = new THREE.MeshNormalMaterial();
-var cube1 = new THREE.Mesh(geometry, material);
-var cube2 = new THREE.Mesh(geometry, material);
-cube1.position.x = 2;
-cube2.position.x = -2;
-scene.add(cube1);
-scene.add(cube2);
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+for ( var i = 0; i < geometry.faces.length; i += 2 ) {
+          var hex = 0xB5B5B5;
+          geometry.faces[ i ].color.setHex( hex );
+          geometry.faces[ i + 1 ].color.setHex( hex );
+        }
+geometry.faces[ 0 ].color.setHex( 0xFF0000 );
+geometry.faces[ 0 + 1 ].color.setHex( 0xFF0000 );
+geometry.faces[ 4 ].color.setHex( 0x00FF00 );
+geometry.faces[ 4 + 1 ].color.setHex( 0x00FF00 );
+geometry.faces[ 8 ].color.setHex( 0x0000ff );
+geometry.faces[ 8 + 1 ].color.setHex( 0x0000ff );
+var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors, overdraw: 0.5 } );
+var cube = new THREE.Mesh( geometry, material );
+var axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
+scene.add( cube );
 
 // camera.position.z = 3;
-camera.position.y = -3;
-camera.position.z = -0.5;
-camera.rotateX(90);
+// camera.rotateZ();
+// camera.position.x = 3;
+// camera.position.z = 3;
+camera.rotateZ(Math.PI/2);
+camera.rotateX(Math.PI/2);
+camera.position.z = 0.5;
+camera.position.x = 3;
 
 toRotation1 = new THREE.Quaternion(0,0,0,1);
 toRotation2 = new THREE.Quaternion(0,0,0,1);
 
 var animate = function() {
 
-  cube1.quaternion.slerp(toRotation1, 1)
-  cube2.quaternion.slerp(toRotation2, 1)
+  cube.quaternion.slerp(toRotation1, 1)
   requestAnimationFrame(animate);
 
   renderer.render(scene, camera);
@@ -75,10 +87,7 @@ socket.on("new_message", (data) => {
     // console.log(data.message)
     toRotation1 = new THREE.Quaternion(data.message[1], data.message[2], data.message[3], data.message[0]);
   }
-  else if (data.username == 'Sensor1'){
-    // console.log(data.message)
-    toRotation2 = new THREE.Quaternion(data.message[1], data.message[2], data.message[3], data.message[0]);
-  }
+
   // chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
   // gotoBottom('chatroom')
 })
