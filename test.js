@@ -25,6 +25,10 @@ app.get('/cube2', (req, res) => {
     res.render('cube2')
 })
 
+app.get('/playback', (req, res) => {
+    res.render('playback')
+})
+
 //Listen on port 3000
 server = app.listen(8080)
 

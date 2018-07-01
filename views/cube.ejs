@@ -1,98 +1,97 @@
 <html>
 
-  <head>
-    <title>My first three.js app</title>
-    <style>
-      body {
-        margin: 0;
-      }
+<head>
+	<title>My first three.js app</title>
+	<style>
+		body {
+			margin: 0;
+		}
 
-      canvas {
-        width: 100%;
-        height: 100%
-      }
+		canvas {
+			width: 100%;
+			height: 100%
+		}
+	</style>
 
-    </style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+</head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-  </head>
+<body>
+	<script src="https://threejs.org/build/three.js"></script>
+	<script type="text/javascript">
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-  <body>
-    <script src="https://threejs.org/build/three.js"></script>
-    <script type="text/javascript">
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-for ( var i = 0; i < geometry.faces.length; i += 2 ) {
-          var hex = 0xB5B5B5;
-          geometry.faces[ i ].color.setHex( hex );
-          geometry.faces[ i + 1 ].color.setHex( hex );
-        }
-geometry.faces[ 0 ].color.setHex( 0xFF0000 );
-geometry.faces[ 0 + 1 ].color.setHex( 0xFF0000 );
-geometry.faces[ 4 ].color.setHex( 0x00FF00 );
-geometry.faces[ 4 + 1 ].color.setHex( 0x00FF00 );
-geometry.faces[ 8 ].color.setHex( 0x0000ff );
-geometry.faces[ 8 + 1 ].color.setHex( 0x0000ff );
-var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors, overdraw: 0.5 } );
-var cube = new THREE.Mesh( geometry, material );
-var axesHelper = new THREE.AxesHelper( 5 );
-scene.add( axesHelper );
-scene.add( cube );
-
-// camera.position.z = 3;
-// camera.rotateZ();
-// camera.position.x = 3;
-// camera.position.z = 3;
-camera.rotateZ(Math.PI/2);
-camera.rotateX(Math.PI/2);
-camera.position.z = 0.5;
-camera.position.x = 3;
-
-toRotation1 = new THREE.Quaternion(0,0,0,1);
-toRotation2 = new THREE.Quaternion(0,0,0,1);
-
-var animate = function() {
-
-  cube.quaternion.slerp(toRotation1, 1)
-  requestAnimationFrame(animate);
-
-  renderer.render(scene, camera);
-    //console.log(i)
-    // if (i < data.length) {
-    //     i+= 1;
-    // } else {
-    //     i = 0;
-    // }
-    // toRotation1 = new THREE.Quaternion(data[i][0], data[i][1], data[i][2], data[i][3]);
-
-};
-
-animate();
-    //make connection
-var socket = io.connect('http://128.199.101.16:8080')
-
-//buttons and inputs
+		var renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
 
 
-//Listen on new_message
-socket.on("new_message", (data) => {
-  if (data.username == 'Sensor0'){
-    // console.log(data.message)
-    toRotation1 = new THREE.Quaternion(data.message[1], data.message[2], data.message[3], data.message[0]);
-  }
+		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		for (var i = 0; i < geometry.faces.length; i += 2) {
+			var hex = 0xB5B5B5;
+			geometry.faces[i].color.setHex(hex);
+			geometry.faces[i + 1].color.setHex(hex);
+		}
+		geometry.faces[0].color.setHex(0xFF0000);
+		geometry.faces[0 + 1].color.setHex(0xFF0000);
+		geometry.faces[4].color.setHex(0x00FF00);
+		geometry.faces[4 + 1].color.setHex(0x00FF00);
+		geometry.faces[8].color.setHex(0x0000ff);
+		geometry.faces[8 + 1].color.setHex(0x0000ff);
+		var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.FaceColors, overdraw: 0.5 });
+		var cube = new THREE.Mesh(geometry, material);
+		var axesHelper = new THREE.AxesHelper(5);
+		scene.add(axesHelper);
+		scene.add(cube);
 
-  // chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
-  // gotoBottom('chatroom')
-})
+		// camera.position.z = 3;
+		// camera.rotateZ();
+		// camera.position.x = 3;
+		// camera.position.z = 3;
+		camera.rotateZ(Math.PI / 2);
+		camera.rotateX(Math.PI / 2);
+		camera.position.z = 0.5;
+		camera.position.x = 3;
 
-</script>
-  </body>
+		toRotation1 = new THREE.Quaternion(0, 0, 0, 1);
+		toRotation2 = new THREE.Quaternion(0, 0, 0, 1);
+
+		var animate = function () {
+
+			cube.quaternion.slerp(toRotation1, 1)
+			requestAnimationFrame(animate);
+
+			renderer.render(scene, camera);
+			//console.log(i)
+			// if (i < data.length) {
+			//     i+= 1;
+			// } else {
+			//     i = 0;
+			// }
+			// toRotation1 = new THREE.Quaternion(data[i][0], data[i][1], data[i][2], data[i][3]);
+
+		};
+
+		animate();
+		//make connection
+		var socket = io.connect('http://128.199.101.16:8080')
+
+		//buttons and inputs
+
+
+		//Listen on new_message
+		socket.on("new_message", (data) => {
+			if (data.username == 'Sensor0') {
+				// console.log(data.message)
+				toRotation1 = new THREE.Quaternion(data.message[1], data.message[2], data.message[3], data.message[0]);
+			}
+
+			// chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+			// gotoBottom('chatroom')
+		})
+
+	</script>
+</body>
 
 </html>
