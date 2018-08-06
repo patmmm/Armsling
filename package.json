@@ -1,16 +1,16 @@
 {
-  "name": "armsling",
-  "version": "1.0.0",
-  "description": "Korn's senior project",
-  "scripts": {
-      "start": "test.js",
-    "dev": "node test.js"
-  },
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "bufferpack": "0.0.6",
-    "ejs": "^2.6.1",
-    "express": "^4.16.3",
-    "socket.io": "^2.1.1"
-  }
+    "name": "armsling",
+    "version": "1.0.0",
+    "description": "Korn's senior project",
+    "scripts": {
+        "start": "node test.js",
+        "dev": "node test.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "bufferpack": "0.0.6",
+        "ejs": "^2.6.1",
+        "express": "^4.16.3",
+        "socket.io": "^2.1.1"
+    }
 }
