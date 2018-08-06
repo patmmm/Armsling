@@ -69,7 +69,8 @@
         var renderer;
         var toRotate;
         var cube;
-        var sensor = 'Sensor0';
+        var sensor = 'Sensor1';
+        alert("hello2");
         function init() {
 
             var stats = initStats();
@@ -102,7 +103,7 @@
             light2.intensity = 1;
             scene.add(light);
             scene.add(light2);
-
+            
             //setup helper
             var lightHelper = new THREE.DirectionalLightHelper(light);
             var lightHelper2 = new THREE.DirectionalLightHelper(light2);
@@ -124,8 +125,28 @@
             cube = new THREE.Mesh(geometry, material);
             cube.castShadow = true;
             camera.lookAt(cube.position);
-            scene.add(cube);
+            // scene.add(cube);
+            
+            var bones = [];
 
+			var shoulder = new THREE.Bone();
+			var elbow = new THREE.Bone();
+			var hand = new THREE.Bone();
+
+			shoulder.add( elbow );
+			elbow.add( hand );
+
+			bones.push( shoulder );
+			bones.push( elbow );
+			bones.push( hand );
+
+			shoulder.position.y = -5;
+			elbow.position.y = 0;
+			hand.position.y = 5;
+
+			var armSkeleton = new THREE.Skeleton( bones );
+
+			scene.add(armSkeleton);
             toRotate = new THREE.Quaternion(0, 0, 0, 1);
 
             document.getElementById("WebGL-output").appendChild(renderer.domElement);

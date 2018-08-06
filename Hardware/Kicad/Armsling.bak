@@ -74,7 +74,7 @@ L C C1
 U 1 1 5B40FBFA
 P 4650 3450
 F 0 "C1" H 4675 3550 50  0000 L CNN
-F 1 "10 uF" H 4675 3350 50  0000 L CNN
+F 1 "1 uF" H 4675 3350 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4688 3300 50  0001 C CNN
 F 3 "" H 4650 3450 50  0001 C CNN
 	1    4650 3450
@@ -151,9 +151,9 @@ Wire Wire Line
 Wire Wire Line
 	4450 3250 5600 3250
 Wire Wire Line
-	4650 3850 4650 3600
+	4650 3600 4650 3850
 Wire Wire Line
-	3350 3850 4650 3850
+	4650 3850 3950 3850
 Wire Wire Line
 	3950 3650 3950 4100
 Connection ~ 3950 3850
@@ -204,6 +204,37 @@ Wire Wire Line
 	7700 2450 7700 3350
 Wire Wire Line
 	7700 3350 8250 3350
+$Comp
+L Screw_Terminal_01x03 J1
+U 1 1 5B416CCB
+P 7400 3650
+F 0 "J1" H 7400 3850 50  0000 C CNN
+F 1 "Screw_Terminal_01x03" H 7400 3450 50  0000 C CNN
+F 2 "Connectors:Fan_Pin_Header_Straight_1x03" H 7400 3650 50  0001 C CNN
+F 3 "" H 7400 3650 50  0001 C CNN
+	1    7400 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6700 2650 7550 2650
+Wire Wire Line
+	7550 2650 7550 3350
+Wire Wire Line
+	7550 3350 7200 3350
+Wire Wire Line
+	7200 3350 7200 3550
+Wire Wire Line
+	6700 2750 7400 2750
+Wire Wire Line
+	7400 2750 7400 3450
+Wire Wire Line
+	7400 3450 7100 3450
+Wire Wire Line
+	7100 3450 7100 3650
+Wire Wire Line
+	7100 3650 7200 3650
+Wire Wire Line
+	7200 3750 6700 3750
 Connection ~ 6700 3750
 $Comp
 L SW_SPST SW1
@@ -257,20 +288,4 @@ F 3 "" H 8050 2450 50  0001 C CNN
 	1    8050 2450
 	1    0    0    -1  
 $EndComp
-$Comp
-L C C?
-U 1 1 5B41BEB0
-P 3350 3450
-F 0 "C?" H 3375 3550 50  0000 L CNN
-F 1 "10 uf" H 3375 3350 50  0000 L CNN
-F 2 "" H 3388 3300 50  0001 C CNN
-F 3 "" H 3350 3450 50  0001 C CNN
-	1    3350 3450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3350 3300 3350 3250
-Connection ~ 3350 3250
-Wire Wire Line
-	3350 3600 3350 3850
 $EndSCHEMATC

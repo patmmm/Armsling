@@ -21,9 +21,13 @@ app.get('/cube', (req, res) => {
     res.render('cube')
 })
 
-app.get('/cube2', (req, res) => {
-    res.render('cube2')
+app.get('/shape', (req, res) => {
+    res.render('shape')
 })
+
+// app.get('/cube2', (req, res) => {
+//     res.render('cube2')
+// })
 
 app.get('/playback', (req, res) => {
     res.render('playback')
@@ -63,7 +67,8 @@ io.on('connection', (socket) => {
 })
 
 s.on('message', function(msg, rinfo) {
-	var data = bufferpack.unpack('<BffffLL',msg,0);
+	var data = bufferpack.unpack('<BffffLLL',msg,0);
+    // s.send(''+data[6]+'.'+data[7],rinfo.port,rinfo.address)
 	// console.log('I got this message: ' + data);
 	io.emit('new_message', {message : data.slice(1,), username : 'Sensor'+data[0]});
 });
