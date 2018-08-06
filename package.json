@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Korn's senior project",
   "scripts": {
+      "start": "test.js",
     "dev": "node test.js"
   },
   "dependencies": {
